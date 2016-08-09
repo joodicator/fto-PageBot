@@ -50,7 +50,7 @@ def h_fto_msg(bot, id, target, msg):
     and strip('Legolambnon') not in strip(msg):
         reply('La la la la la la la la la Legolambnon!')
     
-    elif strip('I command all of the Argives!') in strip(msg) \
+    elif re.search(r'i command all of the ar.*ives', sstrip(msg)) \
     and strip('roast me up') not in strip(msg) \
     and strip('gas mark five') not in strip(msg):
         reply('Roast me up at gas mark five!')
