@@ -44,6 +44,9 @@ If new files are added after receiving updates from this repository, you may nee
 
 ## Available Plugins
 
-### fto
+#### `fto`
 For channels not in `conf/quiet_channels.txt`, gives automatic responses to certain messages; and adds the following commands:
 * `!nuke` - kicks the user issuing this command from the channel.
+
+#### `tell_fto`
+Modifies the `tell` module with customised messages for some users. (This module automatically loads `tell` when loaded.)
