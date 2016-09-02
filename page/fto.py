@@ -4,6 +4,7 @@ from untwisted.magic import sign, hold
 
 import re
 import time
+import random
 
 from channel import not_quiet
 import message
@@ -357,7 +358,47 @@ def h_fto_msg(bot, chan, msg):
     #---------------------------------------------------------------------------
     # Christopher Lee - The Bloody Verdict of Verden
     # https://www.youtube.com/watch?v=cvKRbi2ovDY
-    
+    elif re.search(r'\bs(a(xon|hson|ssen|chsen|ksen|xe)|eaxe)', sstrip_msg) \
+    and not re.search(r'\bblood\b', sstrip_msg):
+        global saxon
+        saxon = globals().get('saxon', {})
+        if saxon.get(chan.lower()) > time.time() - 24*3600: return
+
+        count, end, ssmsg = 1, time.time()+300, sstrip_msg
+        while count < 3:
+            _, (e_bot, e_chan, e_msg) = yield hold(bot, 'FTO_MSG')
+            if time.time() > end: break
+            if e_chan.lower() != chan.lower(): continue
+
+            ssmsg = sstrip(e_msg)
+            if count < 2 and re.search(r'\bblood\b', ssmsg): break
+            if not re.search(r'\bs(a(xon|hson|ssen|chsen|ksen|xe)|eaxe)', ssmsg):
+                continue
+
+            count += 1
+            if count == 2:
+                if saxon.get(chan.lower()) > time.time() - 24*3600: return
+
+                parts = []
+                if random.random() < 0.5: parts.append(
+                    'I shed blood of Saxon men!')
+                parts.append(
+                    'I shed the blood of the Saxon men!')
+                if random.random() < 0.5: parts.append(
+                    'I shed the blood of four thousand Saxon men!')
+                reply(' '.join(parts))
+                saxon[chan.lower()] = time.time()
+
+            elif count == 3:
+                reply('I shed it at Verden!')
+                saxon[chan.lower()] = time.time()
+
+    elif re.match(r'i.*shed.*blood.*of.*saxon.*m[ea]n$', strip_msg) \
+    and 'fourthousand' not in strip_msg:
+        saxon = globals().get('saxon', {})
+        if saxon.get(chan.lower()) > time.time() - 8*3600: return
+        reply('I shed the blood of four thousand Saxon men!')
+        saxon[chan.lower()] = time.time()
 
 #===============================================================================
 @link('!nuke')
