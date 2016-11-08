@@ -231,23 +231,25 @@ def h_fto_msg(bot, chan, msg):
     #---------------------------------------------------------------------------
     # The Fellowship of the Ring (2001) - The Council of Elrond
     # https://www.youtube.com/watch?v=pxPGzj2L3n0
-    elif re.search(r'^(you have|and) my \S+'
-    '|(you have|and) my \S+( \S+)?$', sstrip_msg):
+    elif re.search(r'^you have my \S+|\byou have my \S+( \S+)?$', sstrip_msg):
         global and_my_axe
         try:
             if time.time() < and_my_axe.get(chan.lower()): return
         except NameError:
             and_my_axe = dict()
-        and_my_axe[chan.lower()] = time.time() + 60
+        and_my_axe[chan.lower()] = time.time() + 3600
+        end_time = time.time() + 60
 
-        while time.time() < and_my_axe[chan.lower()]:
+        while True:
             _, (e_bot, e_chan, e_msg) = yield hold(bot, 'FTO_MSG')
             if not e_chan or e_chan.lower() != chan.lower():
                 continue
+            if time.time() >= end_time:
+                return
             if re.search(r'^and( you have)? my \S+'
-            '|and( you have)? my \S+( \S+)?$', sstrip(e_msg)):
+            '|\band( you have)? my \S+( \S+)?$', sstrip(e_msg)):
                 reply('AND MY AXE!')
-                break
+            break
 
     #---------------------------------------------------------------------------
     # Blackout Crew - Put A Donk On It
