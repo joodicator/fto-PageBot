@@ -231,7 +231,8 @@ def h_fto_msg(bot, chan, msg):
     #---------------------------------------------------------------------------
     # The Fellowship of the Ring (2001) - The Council of Elrond
     # https://www.youtube.com/watch?v=pxPGzj2L3n0
-    elif re.search(r'^you have my \S+|\byou have my \S+( \S+)?$', sstrip_msg):
+    elif (re.search(r'^you have my \S+|\byou have my \S+( \S+)?$', sstrip_msg)
+    and not re.search(r'my axe', sstrip_msg)):
         global and_my_axe
         try:
             if time.time() < and_my_axe.get(chan.lower()): return
@@ -244,11 +245,13 @@ def h_fto_msg(bot, chan, msg):
             _, (e_bot, e_chan, e_msg) = yield hold(bot, 'FTO_MSG')
             if not e_chan or e_chan.lower() != chan.lower():
                 continue
-            if time.time() >= end_time:
+            elif time.time() >= end_time or re.search(r'my axe', sstrip(e_msg)):
                 return
-            if re.search(r'^and( you have)? my \S+'
+            elif re.search(r'^and( you have)? my \S+'
             '|\band( you have)? my \S+( \S+)?$', sstrip(e_msg)):
                 reply('AND MY AXE!')
+            else:
+                del and_my_axe[chan.lower()]
             break
 
     #---------------------------------------------------------------------------
@@ -418,7 +421,7 @@ def h_nuke(bot, id, target, args, full_msg):
 
     message.reply(bot, id, target, 'Nuclear launch detected.', prefix=False)
     yield runtime.sleep(15)
-    bot.send_cmd('KICK %s %s :GIANT ASPARAGUS!' % (target, id.nick))
+    bot.send_cmd('KICK %s %s :Akuryou taisan!' % (target, id.nick))
     
     ERR_CHANOPRIVSNEEDED = '482'
     UNREAL_ERR_CANNOTDOCOMMAND = '972'
