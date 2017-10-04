@@ -26,8 +26,8 @@ def h_message(bot, id, target, msg):
 
 @link('PROXY_MSG')
 @not_quiet()
-def h_proxy_msg(bot, id, target, msg, **kwds):
-    if not target.startswith('#'): return
+def h_proxy_msg(bot, id, target, msg, no_auto=False, **kwds):
+    if no_auto or not target.startswith('#'): return
     yield sign('FTO_MSG', bot, target, msg)
 
 #===============================================================================
