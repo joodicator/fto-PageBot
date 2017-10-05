@@ -1,3 +1,5 @@
+
+
 import datetime
 
 import util
@@ -16,7 +18,7 @@ identity.add_credentials('quora.Bruce',
     ('prev_hosts', 3))
 
 notify = (
-    ('#fto', 'Bruce/Bro*ose', 'quora.Bruce')
+    ('#fto', 'Bruce/Bro*ose', 'quora.Bruce'),
 )
 
 @link('QUORA_POST')
