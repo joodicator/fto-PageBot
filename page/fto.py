@@ -445,6 +445,17 @@ def h_nuke(bot, id, target, args, full_msg):
     nuclear_launch.discard(target_id)
 
 #===============================================================================
+@link('!urk')
+def h_urk(bot, id, target, args, full_msg):
+    reply_url = random.choice((
+        'https://i.imgur.com/j9wHs6W.jpg',
+        'https://i.imgur.com/oHbphbE.jpg',
+        'https://i.imgur.com/dUKjGVi.jpg',
+        'https://i.imgur.com/jKLxKdY.jpg',
+    ))
+    message.reply(bot, id, target, '%s Urk!' % reply_url, prefix=False)
+
+#===============================================================================
 def ustrip(_fun):
     def fun(text):
         try: return _fun(text.decode('utf-8'))
