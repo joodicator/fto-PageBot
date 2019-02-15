@@ -24,7 +24,13 @@ This repository contains additional plugins, and static configuration files, tha
    ln -s ../../fto-PageBot/page/*.py .
    ```
 
-5. For each symbolic link created in `~/PageBot/page`, add a corresponding entry to `~/PageBot/git/info/exclude`. For example:
+5. Optionally, for each file in `~/fto-PageBot/tools`, create a symbolic link in `~/PageBot/toold`. For example:
+   ```bash
+   cd ~/PageBot/tools
+   ln -s ../../fto-PageBot/tools/* .
+   ```
+
+6. For each symbolic link created in `~/PageBot/page` or `~/PageBot/tools`, add a corresponding entry to `~/PageBot/git/info/exclude`. For example:
    
    ```
     # git ls-files --others --exclude-from=.git/info/exclude
@@ -38,7 +44,7 @@ This repository contains additional plugins, and static configuration files, tha
     
    Do not add these entries to any versioned `.gitignore` file in `~/PageBot`. Do not commit any such symbolic links to the main PageBot repository.
 
-6. Add any modules from `~/fto-PageBot/page`, that you wish to use with PageBot, to the `plugins` section of `~/PageBot/conf/bot.py`, and run PageBot as usual.
+7. Add any modules from `~/fto-PageBot/page`, that you wish to use with PageBot, to the `plugins` section of `~/PageBot/conf/bot.py`, and run PageBot as usual.
 
 If new files are added after receiving updates from this repository, you may need to repeat some of the above steps for the new files.
 
