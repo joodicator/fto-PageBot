@@ -24,7 +24,7 @@ This repository contains additional plugins, and static configuration files, tha
    ln -s ../../fto-PageBot/page/*.py .
    ```
 
-5. Optionally, for each file in `~/fto-PageBot/tools`, create a symbolic link in `~/PageBot/toold`. For example:
+5. Optionally, for each file in `~/fto-PageBot/tools`, create a symbolic link in `~/PageBot/tools`. For example:
    ```bash
    cd ~/PageBot/tools
    ln -s ../../fto-PageBot/tools/* .
@@ -56,3 +56,6 @@ For channels not in `conf/quiet_channels.txt`, gives automatic responses to cert
 
 #### `tell_fto`
 Modifies the `tell` module with customised messages for some users. (This module automatically loads `tell` when loaded.)
+
+#### `quora_fto`
+Sends messages, using `tell`, to some users when the `quora` module posts a question while they are not in the channel. (This module automatically loads `tell` when loaded.)
