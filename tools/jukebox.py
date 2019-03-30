@@ -79,8 +79,8 @@ def main():
         v_url = item[0][0] + v_id
         t_url = 'https://i3.ytimg.com/vi/%s/default.jpg' % v_id
 
-        print('      <tr%s>' % ' class="nsfw"' if nsfw else '')
-        print('        <td><a href="%s"><img src="%s"><a/></td>'
+        print('      <tr%s>' % (' class="nsfw"' if nsfw else ''))
+        print('        <td><a href="%s"><img src="%s" /></a></td>'
             % (html_escape(v_url), html_escape(t_url)))
         print('        <td><a class="title" href="%s">%s</a></td>' % (
             v_url, '<br>'.join(html_escape(l.encode('utf8')) for l in title)

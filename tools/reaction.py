@@ -63,7 +63,7 @@ def main():
         url = ''.join(t for (t, d) in item)
         name = ''.join(t for (t, d) in item[1:])
         print('      <tr>')
-        print('        <td><a href="%s"><img src="%s"></img></a></td>'
+        print('        <td><a href="%s"><img src="%s"></a></td>'
             % (html_escape(url), html_escape(url)))
         print('        <td><code>%s</code></td>' % html_escape(name))
         print('        <td><code>%s</code></td>' % html_escape(item[1][1]))
