@@ -405,6 +405,27 @@ def h_fto_msg(bot, chan, msg):
         reply('I shed the blood of four thousand Saxon men!')
         saxon[chan.lower()] = time.time()
 
+    #---------------------------------------------------------------------------
+    # Dr. Tran MAIL (S1, Ep03) "The Specials"
+    # https://www.youtube.com/watch?v=J7nvJ8s3bwY
+    elif re.search(r'\bspecials\b', strip_msg):
+        global specials
+        if 'specials' not in globals() or specials < time.time() - 24*3600:
+            specials = time.time()
+            reply('Today, Dr. Tran recommends the chicken fried steak and'
+                  ' eggs... or the breakfast tostada!')
+            yield runtime.sleep(10)
+            reply("But you wanna know about somethin' really special?")
+            yield runtime.sleep(2.5)
+            reply("Dr. Tran is something special! He'll take a SHIT out"
+                  " of a HELICOPER!")
+            yield runtime.sleep(5)
+            reply("He doesn't care! He'll throw your expensive plus-sized"
+                  " jeans in the ocean!")
+            yield runtime.sleep(5)
+            reply("And when he needs to feel super special, he puts on a Tom"
+                  " Hanks movie and gobbles dark chocolate like a JACKASS.")
+
 #===============================================================================
 @link('!nuke')
 def h_nuke(bot, id, target, args, full_msg):
