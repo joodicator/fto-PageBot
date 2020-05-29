@@ -28,7 +28,7 @@ def main():
     print('  <meta name="viewport" content="width=device-width, initial-scale=1.0">')
     print('  <title>PageBot {{#fto/%s}} Catalogue</title>' % DEFINITION)
     print('  <style type="text/css">')
-    print('    body { background:#D8D8E0; font-family:sans-serif;')
+    print('    body { color:#000; background:#D8D8E0; font-family:sans-serif;')
     print('        text-align:center; margin-left:0; margin-right:0; }')
     print('    div#top { display:inline-block; }')
     print('    table#main { border-collapse:collapse; background:#FFF; }')
