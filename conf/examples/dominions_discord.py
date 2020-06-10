@@ -1,7 +1,11 @@
-class channel1:
-    webhook = 'https://discordapp.com/api/webhooks/example1/example1'
-    games = ['Game1', 'Game2']
+class Game1(_DominionsGame):
+    name = 'Game1'
+    prefix = ':yin_yang: '
 
-class channel2:
-    webhook = 'https://discordapp.com/api/webhooks/example2/example2'
-    games = ['Game2']
+class Game2(_DominionsGame):
+    name = 'Game2'
+    prefix = ':star: '
+
+class Channel1(_DiscordChannel):
+    webhook = 'https://discordapp.com/api/webhooks/EXAMPLE/EXAMPLE'
+    games = [Game1, Game2]
