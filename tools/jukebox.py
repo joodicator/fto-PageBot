@@ -1,5 +1,7 @@
 #!/usr/bin/env python2.7
 
+from __future__ import print_function
+
 import os
 import os.path
 import sys
@@ -47,6 +49,7 @@ def main():
     print('    #main code { font-size:larger }')
     print('    #main .error { color:red; font-style:italic }')
     print('    #main .title { font-weight:bold; color:#000; text-decoration:none }')
+    print('    #main .title .title-annotation { font-weight:normal; }')
     print('  </style>')
     print('</head>')
     print('<body>')
@@ -66,6 +69,8 @@ def main():
     print('    </thead>')
     print('    <tbody>')
     for item, prob in reversed(list(enum_defn(CHANNEL, DEFINITION))):
+        print(item, file=sys.stderr)
+
         v_id = ''.join(t for (t, d) in item[1:])
         match = re.match(r'(?P<id>.*)\s+\((?P<notes>.*)\)$', v_id)
         if match:
@@ -83,7 +88,7 @@ def main():
         print('        <td><a href="%s"><img src="%s" /></a></td>'
             % (html_escape(v_url), html_escape(t_url)))
         print('        <td><a class="title" href="%s">%s</a></td>' % (
-            v_url, '<br>'.join(html_escape(l.encode('utf8')) for l in title)
+            v_url, '<br>'.join(l.encode('utf8') for l in title)
             if title else '<span class="error">Video unavailable.</span>'))
         print('        <td>%s</td>' % html_escape(notes))
         print('        <td nowrap><code>%s</code></td>' % html_escape(v_id))
@@ -125,10 +130,10 @@ def video_title(v_id):
         title_en = snippet['localized']['title']
         dl = snippet.get('defaultLanguage')
         if dl and title_en != title_dl:
-            title = ('%s (%s)' % (title_dl, dl),
-                     '%s (en)' % title_en)
+            title = ('%s <span class="title-annotation">(%s)</span>' % (html_escape(title_dl), dl),
+                     '%s <span class="title-annotation">(en)</span>' % html_escape(title_en))
         else:
-            title = (title_dl,)
+            title = (html_escape(title_dl),)
     else:
         title = None
 
